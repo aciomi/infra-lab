@@ -1,4 +1,27 @@
+# Adding common sensitive files. Will either add or remove as see fit
+
+# Python 
 venv/
-.env
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment var files
+.env
+
+# Airflow config
+airflow.cfg
+
+# Logs, temp, bak files
+*.log
+*.tmp
+*.bak
+
+# DB files
 *.db
+*.sqlite3
+*.sql
+
+# MacOS system files
+.DS_Store
