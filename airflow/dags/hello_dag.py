@@ -17,19 +17,14 @@ default_args = {
     'retry_delay': timedelta(minutes = 1),
 }
 
-dag = DAG(
-    dag_id = 'hello_world_dag',
-    default_args = default_args,
-    description = 'A simple Hello World DAG',
-    schedule_interval = None,
-)
-
-# Python task
-task_hw = PythonOperator(
-    task_id='say_hello_world',
-    python_callable= hello_world,
-    dag=dag, #which dag it belongs to
-)
-
-# Task to call
-task_hw
+with DAG(
+    dag_id='hello_world_dag',
+    default_args=default_args,
+    description='A simple Hello World DAG',
+    schedule_interval=None,
+) as dag:
+    task_hw = PythonOperator(
+        task_id='say_hello_world',
+        python_callable=hello_world,
+    )
+    task_hw
