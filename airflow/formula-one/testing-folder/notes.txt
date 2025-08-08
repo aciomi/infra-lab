@@ -1,0 +1,33 @@
+---File will be used for notes to keep track of project progress, any API keys or credentials will not be logged in this file---
+
+Goal: Create a DAG that performs ETL for Forumula 1 races. At first, DAG will run after each Grand Prix and Extract information from openf1 
+then Transform it into a cleaner CSV file which will also act as a backup in my raspberry pie server before being Loaded into my 
+PostgreSQL server for future analysis with other tools later in the infra-lab projects. 
+
+Decided to use OpenF1 instead of FastF1 as it is more "messy" in the sense it will give me real-life format, 
+which is never truly simple nor cleaned as FastF1 (uses Panda). Gives me practice to clean data and run into
+formatting issues. 
+
+issues: 
+08/07
+- collecting unneccessary information thus will need to first parse which information will be usefull, but could also just dump
+all data, possible ELT instead. 
+- will need to join tables to get the corresponding data from all points of the API
+- DataTable could have lots of information, divide into: DRIVER, CAR_DATA, LAP_DATA, ???????
+
+thinking:
+08/07
+- first glance api, possible endpoints to retrieve:
+                    - Car data
+                    - Drivers
+                    - Laps
+                    - Meetings --> used to filter race weekends, country, meeting_key (KEY?)
+                    - Pit 
+                    - Position (maybe)
+                    - Race control (link with session_key, meeting_key)
+                    - Sessions (use session_key as KEY for race day, look for session_name & session_type = 'Race', first task then everything follows after retrieving session_key)
+                    - Session result
+                    - Starting grid
+                    - Stints (period of tyre usage)
+                    - Weather (can use for analysis over weather conditions effecting drivers, use last as updates every minute, save for last, not urgent)
+- next steps, understaning how OpenF1 handles API calls, filtering, time-based filtering, format. 
