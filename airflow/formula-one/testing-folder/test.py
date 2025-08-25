@@ -9,13 +9,19 @@ print(data)
 print(f'Session Key: {data[0]["session_key"]}')
 print(f'Meeting Key: {data[0]["meeting_key"]}')
 
-current_race = data[0]["session_key"]
-print('current race session key is: ', current_race)
+session_race_key = data[0]["session_key"]
+meeting_race_key = data[0]["meeting_key"]
+print('current race session key is: ', session_race_key)
 
 # Next time: start extracting data, do not worry about formatting just yet, just extract with session_key, meeting_key. 
 # Make sure you have a function that ensures you are extracting data from race day, not any other race format. 
 
 # Drivers
-driver_response = requests.get(f'https://api.openf1.org/v1/drivers?session_key>={current_race}&team_name=Red Bull Racing')
+driver_response = requests.get(f'https://api.openf1.org/v1/drivers?session_key={session_race_key}')
 driver_data = driver_response.json()
 print('Driver data: ', driver_data)
+
+print('Names of Drivers in Race Day: ')
+for driver in driver_data:
+    print(driver['first_name'], driver['last_name'])
+print('Total number of drivers: ', len(driver_data))
